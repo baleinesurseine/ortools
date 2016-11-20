@@ -5,4 +5,5 @@ Thumbs.db
 bin
 objs
 
+*.docx
 .docx
