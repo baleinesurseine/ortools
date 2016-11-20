@@ -1,0 +1,42 @@
+0 : Issy-Les-Moulineaux
+1 : Senlis
+2 : Reims-Tinqueux
+3 : Reims-Ecopole
+4 : Les Essarts
+5 : Montesson
+6 : Roissy-Aéroport
+7 : Orly-Aéroport
+8 location(s)
+0 : Crise 835G ; loc = 0 ; cap = 12 ; visio = 0
+1 : Beauchêne 835D ; loc = 0 ; cap = 10 ; visio = 1
+2 : Baie de Somme 759 ; loc = 0 ; cap = 12 ; visio = 1
+3 : Champagne Ardenne ; loc = 2 ; cap = 8 ; visio = 1
+100 : Bureau EFR ; loc = 0 ; cap = 1 ; visio = 0
+101 : Bureau JGT ; loc = 1 ; cap = 1 ; visio = 0
+102 : Bureau SDU ; loc = 1 ; cap = 1 ; visio = 0
+103 : Bureau PPS ; loc = 0 ; cap = 1 ; visio = 0
+104 : Bureau GFT ; loc = 0 ; cap = 1 ; visio = 0
+105 : Bureau FRY ; loc = 4 ; cap = 1 ; visio = 0
+106 : Bureau KDX ; loc = 1 ; cap = 1 ; visio = 0
+11 room(s)
+42 : semaine 42 ; #fixed = 10 ; #pauses = 5 ; #offs = 5
+1 calendar(s)
+0 : Edouard Fischer ; wp = 100 ; #cals = 1
+1 : Jacques Gielblat ; wp = 101 ; #cals = 1
+2 : Sylvain Davrou ; wp = 102 ; #cals = 1
+3 : Philippe Paris ; wp = 103 ; #cals = 1
+4 : Guy Fremont ; wp = 104 ; #cals = 1
+5 : Franck Rivey ; wp = 105 ; #cals = 1
+6 : Kathleen Dreux ; wp = 106 ; #cals = 1
+7 people
+0 : CoDTS ; loc = -1 ; duration = 150 ; #members = 7
+1 : Travail ; loc = 0 ; duration = 120 ; #members = 1
+2 task(s)
+id1 = 0 ; id2 = 1 ; time = 60
+id1 = 0 ; id2 = 2 ; time = 90
+id1 = 0 ; id2 = 3 ; time = 90
+id1 = 0 ; id2 = 4 ; time = 90
+id1 = 0 ; id2 = 5 ; time = 30
+id1 = 0 ; id2 = 6 ; time = 45
+id1 = 0 ; id2 = 7 ; time = 30
+7 distance(s)
