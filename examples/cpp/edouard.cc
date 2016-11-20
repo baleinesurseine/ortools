@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-#include "base/commandlineflags.h"
+
 #include "base/split.h"
 #include "base/logging.h"
 #include "base/filelinereader.h"
@@ -13,9 +13,6 @@
 
 // for convenience
 using json = nlohmann::json;
-
-DEFINE_string(input, "", "");
-DEFINE_string(solution, "", "");
 
 namespace operations_research {
 
@@ -32,7 +29,6 @@ namespace operations_research {
     }
 
     void createConstraints() {
-      //printDataStructures();
 
       // 0.a - Create optimized meetings
       for (auto const& taskDur : opt_dur) {
@@ -294,69 +290,6 @@ namespace operations_research {
     std::map<int, std::vector<int>> off_calendars; // <peopleId, [calId]> calendrier de congés d'une personne
     std::map<int, int> workPlaces;
 
-    void printDataStructures() {
-      // std::map<int, int> durations;
-      cout << "Durations:\n";
-      for (auto const& duration : durations) {
-        cout << duration.first << "-" << task_names[duration.first] << ": " << duration.second << " ; ";
-      }
-      cout << "\n";
-      // std::map<int, int> opt_dur; // <task_id, duration> durée des réunions à optimiser
-      // std::map<int, int> opt_after; // <task_id, date au plus tôt> heure au plus tôt pour les réunions à optimiser
-      cout << "Optimizing tasks:\n";
-      for (auto const& opt : opt_dur) {
-        cout << opt.first << "-" << task_names[opt.first] << ": (" << opt_after[opt.first] << ")" << opt.second << " ; ";
-      }
-      cout << "\n";
-      // std::map<int, int> fixed_start; // <task_id, start> heure de début des réunions fixées
-      // std::map<int, int> fixed_dur; // <task_id, duration> durée des réunions fixées
-      // std::map<int, int> fixed_loc; // <task_id, locationId> lieux des réunions fixées
-      // std::map<int, int> fixed_room; // <task_id, roomId> salle des réunions fixées  USEFUL ?
-      cout << "Fixed tasks\n";
-      for (auto const& fixed : fixed_start) {
-        cout << fixed.first << "-" << task_names[fixed.first] << ": (" << fixed.second << ")" << fixed_dur[fixed.first] << "," << fixed_loc[fixed.first] << " ; ";
-      }
-      cout << "\n";
-      // std::map<int, std::vector<int>> participants; // <task_id, [peopleId]> participants à une réunion
-      cout << "Participants:\n";
-      for (auto const& participant : participants) {
-        cout << participant.first << ": {";
-        for (auto const& peopleId : participant.second) {
-          cout << peopleId << "-" << people_names[peopleId] << ", ";
-        }
-        cout << "} ; ";
-      }
-      cout << "\n";
-      // std::map<int, std::vector<int>> salles; // <location_id, [room_Id]> salles d'un site
-      // std::map<int, int> site_salle; // <room_Id, location_id> site d'une salle
-      // std::map<int, int> capacity; // <room_id, capacity> capacité des salles
-      // std::vector<int> non_viso; // <roomId> liste des salles sans visio
-      // std::map<int, std::vector<int>> meetings; // <peopleId, [task_id]> liste des réunions d'une personne
-      cout << "Meeting:\n";
-      for (auto const& meeting : meetings) {
-        cout << meeting.first << "-" << people_names[meeting.first] << ": {";
-        for (auto const& task : meeting.second) {
-          cout << task << "-" << task_names[task] << ", ";
-        }
-        cout << "} ; ";
-      }
-      cout << "\n";
-      // std::map<int, std::vector<int>> solo; // <peopleId, [task_id]> liste des tâches solo d'une personne
-      cout << "Solo:\n";
-      for (auto const& meeting : solo) {
-        cout << meeting.first << "-" << people_names[meeting.first] << ": {";
-        for (auto const& task : meeting.second) {
-          cout << task << "-" << task_names[task] << ", ";
-        }
-        cout << "} ; ";
-      }
-      cout << "\n";
-      // std::map<int, std::vector<int>> start_off; // <calId, [start]> début des plages non travaillées d'un calendrier
-      // std::map<int, std::vector<int>> duration_off; // <calId, [duration]> durée des plages non travaillées d'un calendrier
-      // std::map<int, std::vector<int>> fixed_zero; // <calId, [start]> tâches fixées de durée 0 dans le calendrier
-      // std::map<int, std::vector<int>> off_calendars; // <peopleId, [calId]> calendrier de congés d'une personne
-
-    }
 
     int parseLocations(json j) {
       if (j.find("locations") == j.end()) { // nothing to parse
@@ -576,36 +509,7 @@ namespace operations_research {
   }
 } // end operations_research namespace
 
-static const char kUsage[] =
-"Usage: see flags.\nThis program runs something ";
-
 int main(int argc, char** argv) {
-
-  std::cout << __cplusplus << "\n";
-
-  FLAGS_log_prefix = false;
-  gflags::SetUsageMessage(kUsage);
-  gflags::ParseCommandLineFlags(&argc, &argv, true);
-
-  std::istream* iStr;
-  std::ostream* oStr;
-
-  if (FLAGS_input.empty()) {
-    iStr = &std::cin;
-  } else {
-    LOG(INFO) << "Load " << FLAGS_input;
-    std::ifstream ifStr(FLAGS_input, std::ifstream::in);
-    iStr = &ifStr;
-  }
-
-  if (FLAGS_solution.empty()) {
-    oStr = &std::cout;
-  } else {
-    LOG(INFO) << "Output " << FLAGS_solution;
-    std::ofstream ofStr(FLAGS_solution, std::ofstream::app);
-    oStr = &ofStr;
-  }
-  operations_research::Solve(*iStr, *oStr);
-
+  operations_research::Solve(std::cin, std::cout);
   return 0;
 }
