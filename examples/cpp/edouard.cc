@@ -1,11 +1,6 @@
 #include <cstdio>
 #include <fstream>
 #include <iostream>
-
-#include "base/split.h"
-#include "base/logging.h"
-#include "base/filelinereader.h"
-#include "base/stringprintf.h"
 #include "constraint_solver/constraint_solver.h"
 #include "util/json.hpp"
 
@@ -20,7 +15,6 @@ namespace operations_research {
 
   class Model {
   public:
-
     std::map<std::pair<int, int>, int> travel;
 
     explicit Model(const std::string& modelname, int min_time, int max_time) : solv(modelname) {
@@ -29,7 +23,6 @@ namespace operations_research {
     }
 
     void createConstraints() {
-
       // 0.a - Create optimized meetings
       for (auto const& taskDur : opt_dur) {
         int taskId = taskDur.first;
